@@ -1,13 +1,20 @@
 using UnityEngine;
+using System;
+using System.Collections;
 
 public class PlayerMoveController : MonoBehaviour
 {
     private CharacterController characterController;
     private Transform cameraTransform;
+    private Animator animator;
 
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float mouseSensitivity = 2f;
     [SerializeField] float gravity = 9.8f;
+    [SerializeField] private GameObject headHeart; // ← ハート型オブジェクト
+    public float shrinkDuration = 2f;  // 縮小する時間
+    public Vector3 originalScale;  // 初期のスケール
+    private bool isHeart = false;
 
     private float verticalVelocity = 0f;
     private float cameraPitch = 0f;
@@ -16,12 +23,17 @@ public class PlayerMoveController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
+        animator = GetComponent<Animator>();
 
-    // カメラのX軸回転（上下）を初期値として保存
-    cameraPitch = cameraTransform.localEulerAngles.x;
+        animator.SetBool("Idle",true);
+
+        // カメラのX軸回転（上下）を初期値として保存
+        cameraPitch = cameraTransform.localEulerAngles.x;
 
         // カーソルを画面中央にロック
         Cursor.lockState = CursorLockMode.Locked;
+        // headHeart.SetActive(true);
+        StartCoroutine(ShrinkHeart());
     }
 
     void Update()
@@ -51,6 +63,10 @@ public class PlayerMoveController : MonoBehaviour
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
         move *= moveSpeed;
+        
+        bool isWalking = moveX != 0 || moveZ != 0;
+        animator.SetBool("Walk", isWalking);
+        animator.SetBool("Idle", !isWalking);
 
         // 重力処理
         if (characterController.isGrounded)
@@ -65,5 +81,39 @@ public class PlayerMoveController : MonoBehaviour
         move.y = verticalVelocity;
 
         characterController.Move(move * Time.deltaTime);
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Item"))
+        {
+            // HeadHeartを表示
+            if (headHeart != null)
+            {
+                headHeart.SetActive(true);
+            }
+
+            isHeart = true;
+            Destroy(hit.gameObject);
+        }
+    }
+
+    private IEnumerator ShrinkHeart()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < shrinkDuration)
+        {
+            // スケールを徐々に縮小
+            headHeart.transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, elapsedTime / shrinkDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 最終的に非表示にする
+        headHeart.SetActive(false);
+        animator.SetBool("Walk", false);
+        animator.SetBool("Idle", false);
+        animator.SetBool("Death",true);
     }
 }
