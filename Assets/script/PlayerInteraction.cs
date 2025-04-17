@@ -25,13 +25,6 @@ public class PlayerInteraction : MonoBehaviour
         interactionText.text = dialog.Dialog[nowdialog];
     }
 
-    // // 次のセリフを表示する関数
-    // public void ShowNextDialog(int nowdialog)
-    // {
-    //     interactionText.text = currentDialog.Dialog[nowdialog];
-    // }
-
-    // 会話が終了したらTalkWindowを非表示にする
     public void EndDialog()
     {
         talkWindow.SetActive(false);

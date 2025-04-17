@@ -12,10 +12,12 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] float mouseSensitivity = 2f;
     [SerializeField] float gravity = 9.8f;
     [SerializeField] private GameObject headHeart; // ← ハート型オブジェクト
+    public float ratio; // ハートが小さくなる割合
     public float shrinkDuration = 2f;  // 縮小する時間
-    public Vector3 originalScale;  // 初期のスケール
-    private bool isHeart = false;
-
+    private float sizeGetsmaller;  // 小さくなるサイズ
+    private bool isdead = false;
+    private Coroutine shrinkCoroutine;
+    private bool isPaused = false;
     private float verticalVelocity = 0f;
     private float cameraPitch = 0f;
 
@@ -24,6 +26,8 @@ public class PlayerMoveController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
         animator = GetComponent<Animator>();
+        sizeGetsmaller = headHeart.transform.localScale.x * ratio;
+        Debug.Log(sizeGetsmaller);
 
         animator.SetBool("Idle",true);
 
@@ -33,13 +37,20 @@ public class PlayerMoveController : MonoBehaviour
         // カーソルを画面中央にロック
         Cursor.lockState = CursorLockMode.Locked;
         // headHeart.SetActive(true);
+        if (shrinkCoroutine == null)
+        {
+            shrinkCoroutine = StartCoroutine(ShrinkHeart());
+        }
         StartCoroutine(ShrinkHeart());
     }
 
     void Update()
     {
-        RotateView();
-        MovePlayer();
+        if(!isdead)
+        {
+            RotateView();
+            MovePlayer();
+        }
     }
 
     void RotateView()
@@ -65,8 +76,11 @@ public class PlayerMoveController : MonoBehaviour
         move *= moveSpeed;
         
         bool isWalking = moveX != 0 || moveZ != 0;
-        animator.SetBool("Walk", isWalking);
-        animator.SetBool("Idle", !isWalking);
+
+        if(!isdead){
+            animator.SetBool("Walk", isWalking);
+            animator.SetBool("Idle", !isWalking);
+        }
 
         // 重力処理
         if (characterController.isGrounded)
@@ -93,7 +107,6 @@ public class PlayerMoveController : MonoBehaviour
                 headHeart.SetActive(true);
             }
 
-            isHeart = true;
             Destroy(hit.gameObject);
         }
     }
@@ -102,18 +115,53 @@ public class PlayerMoveController : MonoBehaviour
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < shrinkDuration)
+        while (true)
         {
-            // スケールを徐々に縮小
-            headHeart.transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, elapsedTime / shrinkDuration);
-            elapsedTime += Time.deltaTime;
+            if (isPaused)
+            {
+                yield return null;
+                continue;
+            }
+
+            if (elapsedTime < shrinkDuration && headHeart.transform.localScale.x > 0)
+            {
+                headHeart.transform.localScale -= new Vector3(sizeGetsmaller, sizeGetsmaller, sizeGetsmaller);
+
+                elapsedTime += Time.deltaTime;
+            }
+            else if(!isdead)
+            {
+                isdead = true;
+                headHeart.SetActive(false);
+                animator.SetBool("Death", true);
+                animator.SetBool("Idle", false);
+            }
             yield return null;
         }
+    }
 
-        // 最終的に非表示にする
-        headHeart.SetActive(false);
-        animator.SetBool("Walk", false);
-        animator.SetBool("Idle", false);
-        animator.SetBool("Death",true);
+    public void MakeHeartSmaller(float amount)
+    {
+        StartCoroutine(ModifyHeartTemporarily(amount));
+    }
+
+    private IEnumerator ModifyHeartTemporarily(float amount)
+    {
+        isPaused = true; // 一時停止
+
+        if (headHeart != null)
+        {
+            Vector3 currentScale = headHeart.transform.localScale;
+
+            float newX = Mathf.Max(0f, currentScale.x - amount);
+            float newY = Mathf.Max(0f, currentScale.y - amount);
+            float newZ = Mathf.Max(0f, currentScale.z - amount);
+
+            headHeart.transform.localScale = new Vector3(newX, newY, newZ);
+
+            // 処理が即時完了なら少し待ってから再開
+            yield return new WaitForSeconds(0.1f);
+        }
+        isPaused = false; // 再開
     }
 }

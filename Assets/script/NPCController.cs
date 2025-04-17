@@ -8,6 +8,7 @@ public class NPCController : MonoBehaviour
     private Transform player;
     private int nowdialog = 0;
     private bool isdialog = false;
+    private bool isheart = false;
 
     public float interactionRange = 3f; // プレイヤとの距離で判定
 
@@ -37,11 +38,13 @@ public class NPCController : MonoBehaviour
                 player.GetComponent<PlayerInteraction>().ShowDialog(npcDialog.npcNum[npcId], nowdialog);
             }
             
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && !isheart)
             {
                 nowdialog = 1;
                 // プレイヤ側にセリフを渡す
                 player.GetComponent<PlayerInteraction>().ShowDialog(npcDialog.npcNum[npcId], nowdialog);
+                isheart = true;
+                player.GetComponent<PlayerMoveController>().MakeHeartSmaller(0.5f);
             }
         }
         else if(distanceToPlayer > interactionRange && isdialog)

@@ -10044,8 +10044,8 @@ MonoBehaviour:
   mouseSensitivity: 2
   gravity: 9.8
   headHeart: {fileID: 1924530410}
+  ratio: 0.001
   shrinkDuration: 25
-  originalScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1318994366
 MonoBehaviour:
   m_ObjectHideFlags: 0
