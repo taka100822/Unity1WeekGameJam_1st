@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerMoveController : MonoBehaviour
 {
@@ -13,11 +14,10 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] float gravity = 9.8f;
     [SerializeField] private GameObject headHeart; // ← ハート型オブジェクト
     public float ratio; // ハートが小さくなる割合
-    public float shrinkDuration = 2f;  // 縮小する時間
     private float sizeGetsmaller;  // 小さくなるサイズ
     private bool isdead = false;
     private Coroutine shrinkCoroutine;
-    private bool isPaused = false;
+    public bool isPaused = false;
     private float verticalVelocity = 0f;
     private float cameraPitch = 0f;
 
@@ -46,10 +46,14 @@ public class PlayerMoveController : MonoBehaviour
 
     void Update()
     {
-        if(!isdead)
+        if(!isdead && !GetComponent<PlayerInteraction>().isclear)
         {
             RotateView();
             MovePlayer();
+        }
+        if(Input.GetKeyDown(KeyCode.Space) && isdead)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -113,8 +117,6 @@ public class PlayerMoveController : MonoBehaviour
 
     private IEnumerator ShrinkHeart()
     {
-        float elapsedTime = 0f;
-
         while (true)
         {
             if (isPaused)
@@ -123,18 +125,18 @@ public class PlayerMoveController : MonoBehaviour
                 continue;
             }
 
-            if (elapsedTime < shrinkDuration && headHeart.transform.localScale.x > 0)
+            if (headHeart.transform.localScale.x > 0)
             {
                 headHeart.transform.localScale -= new Vector3(sizeGetsmaller, sizeGetsmaller, sizeGetsmaller);
-
-                elapsedTime += Time.deltaTime;
             }
-            else if(!isdead)
+            else if(!isdead && !GetComponent<PlayerInteraction>().isclear)
             {
                 isdead = true;
                 headHeart.SetActive(false);
-                animator.SetBool("Death", true);
+                animator.SetBool("Walk", false);
                 animator.SetBool("Idle", false);
+                animator.SetBool("Death", true);
+                GetComponent<PlayerInteraction>().SetActiveGameOverWindow();
             }
             yield return null;
         }

@@ -1,16 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI;  // UIのTextを使用するため
 
 public class NPCController : MonoBehaviour
 {
     public NPCDialogSO npcDialog; // ScriptableObjectで管理されたNPCのセリフ
     public int npcId;
+
     private Transform player;
     private int nowdialog = 0;
+    private float interactionRange = 3f; // プレイヤとの距離で判定
     private bool isdialog = false;
     private bool isheart = false;
 
-    public float interactionRange = 3f; // プレイヤとの距離で判定
 
     void Start()
     {
@@ -19,6 +19,7 @@ public class NPCController : MonoBehaviour
         {
             player = playerObj.transform;
         }
+        GetComponent<Animator>().SetBool("Idle", false);
     }
 
     void Update()
@@ -43,8 +44,9 @@ public class NPCController : MonoBehaviour
                 nowdialog = 1;
                 // プレイヤ側にセリフを渡す
                 player.GetComponent<PlayerInteraction>().ShowDialog(npcDialog.npcNum[npcId], nowdialog);
+                player.GetComponent<PlayerInteraction>().ReducePeopleWantLoveNum(npcDialog.npcNum[npcId].HeartSize);
                 isheart = true;
-                player.GetComponent<PlayerMoveController>().MakeHeartSmaller(0.5f);
+                player.GetComponent<PlayerMoveController>().MakeHeartSmaller(npcDialog.npcNum[npcId].HeartSize);
             }
         }
         else if(distanceToPlayer > interactionRange && isdialog)

@@ -16,7 +16,12 @@ MonoBehaviour:
   - Dialog:
     - "\u611B\u304C\u307B\u3057\u3044"
     - "\u3042\u308A\u304C\u3068\u3046"
+    HeartSize: 0.5
   - Dialog:
     - "\u5BC2\u3057\u3044"
     - "\u6696\u304B\u3044"
-  - Dialog: []
+    HeartSize: 0.1
+  - Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
