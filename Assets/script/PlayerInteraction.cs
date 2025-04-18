@@ -29,7 +29,7 @@ public class PlayerInteraction : MonoBehaviour
     // NPCが近づいてきたときに呼ばれる関数
     public void ShowDialog(NPCDialogSO.NPCDialog dialog, int nowdialog)
     {
-        interactionText.text = dialog.Dialog[nowdialog];
+        interactionText.text = dialog.Dialog[nowdialog].Replace("\\n", "\n");
     }
 
     public void EndDialog()

@@ -13,15 +13,78 @@ MonoBehaviour:
   m_Name: NPCDialog
   m_EditorClassIdentifier: 
   npcNum:
-  - Dialog:
+  - Name: Worker
+    Dialog:
     - "\u611B\u304C\u307B\u3057\u3044"
     - "\u3042\u308A\u304C\u3068\u3046"
     HeartSize: 0.5
-  - Dialog:
+  - Name: Trucker
+    Dialog:
     - "\u5BC2\u3057\u3044"
     - "\u6696\u304B\u3044"
     HeartSize: 0.1
-  - Dialog:
+  - Name: Girl
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: CasualWoman
+    Dialog:
+    - "\u4F55\u3082\u304B\u3082\u304A\u3057\u307E\u3044\u3060\u308F"
+    - "\u3042\u308A\u304C\u3068\u3046\\n\u3082\u3046\u5C11\u3057\u9811\u5F35\u3063\u3066\u307F\u3088\u3046\u304B\u3057\u3089"
+    HeartSize: 0.5
+  - Name: RiotCop
+    Dialog:
+    - 
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: OldMan
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: Kid
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: BusinessMan
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: FireMan
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: PoliceMan
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: FarmerMan
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: Sheriff
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: CasalWoman
+    Dialog:
+    - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
+    - "\u306F\u3044\u3001\u3069\u30FC\u305E"
+    HeartSize: -0.5
+  - Name: PoliceWoman
+    Dialog:
+    - "\u3053\u3093\u306A\u65E5\u3067\u3082\uFF0C\u5E02\u6C11\u3092\u5B88\u308B\u306E\u304C\u79C1\u306E\u4ED5\u4E8B\u2026\\n\u3060\u3051\u3069\uFF0C\u305F\u307E\u306B\u306F\u5B88\u3089\u308C\u305F\u3044\u306E"
+    - "\u2026\u3042\u308A\u304C\u3068\u3046\\n\u4ECA\u65E5\u306F\u5C11\u3057\u3060\u3051\uFF0C\u79C1\u3082\u81EA\u5206\u3092\u7518\u3084\u304B\u3057\u3066\u307F\u3088\u3046\u304B\u3057\u3089"
+    HeartSize: -0.5
+  - Name: OldWoman
+    Dialog:
     - "\u4E00\u4EBA\u3058\u3083\u306A\u3044\u3088"
     - "\u306F\u3044\u3001\u3069\u30FC\u305E"
     HeartSize: -0.5

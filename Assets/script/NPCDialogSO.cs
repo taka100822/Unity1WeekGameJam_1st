@@ -7,6 +7,8 @@ public class NPCDialogSO : ScriptableObject
     [System.Serializable]
     public class NPCDialog
     {
+        
+        public string Name;
         public string[] Dialog; // セリフの配列
         public float HeartSize; // ハートのサイズ
     }
