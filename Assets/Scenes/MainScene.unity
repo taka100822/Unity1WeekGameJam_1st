@@ -5741,7 +5741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9033528987213949361, guid: 2065d7af322977342b842b8daa80c0b8, type: 3}
       propertyPath: m_Name
-      value: 14.PoliceWoman
+      value: 13.PoliceWoman
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6383,7 +6383,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6141033
+      value: -20.05
       objectReference: {fileID: 0}
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6395,19 +6395,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6415,7 +6415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 122817156024119536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -6423,7 +6423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 124196609552073536, guid: 4ec00fecc16813f41930bd8ba6285c83, type: 3}
       propertyPath: m_Name
-      value: 15.OldWoman
+      value: 14.OldWoman
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6752,7 +6752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309172695357830, guid: 4fd286b338658f84db100ebd31338c7e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13
+      value: 9.024
       objectReference: {fileID: 0}
     - target: {fileID: 4309172695357830, guid: 4fd286b338658f84db100ebd31338c7e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9703,7 +9703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 845117792949599478, guid: e9a97202e5b2e51418f9e497318807d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.342072
+      value: 29.75
       objectReference: {fileID: 0}
     - target: {fileID: 845117792949599478, guid: e9a97202e5b2e51418f9e497318807d5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9711,7 +9711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 845117792949599478, guid: e9a97202e5b2e51418f9e497318807d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.0434895
+      value: 5.08
       objectReference: {fileID: 0}
     - target: {fileID: 845117792949599478, guid: e9a97202e5b2e51418f9e497318807d5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10914,7 +10914,7 @@ MonoBehaviour:
   gameOverWindow: {fileID: 396161128}
   ClearWindow: {fileID: 1732655727}
   isclear: 0
-  peopleWantLoveNum: 2
+  peopleWantLoveNum: 10
 --- !u!1001 &1332382091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12641,7 +12641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3026207945587079712, guid: 847a58bfb9c22ad4bb0f67d186b48e03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -54.5
+      value: -51.5
       objectReference: {fileID: 0}
     - target: {fileID: 3026207945587079712, guid: 847a58bfb9c22ad4bb0f67d186b48e03, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13008,7 +13008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1332063289861872489, guid: 44c0e37dd739f784d8f8d947bd80f5aa, type: 3}
       propertyPath: m_Name
-      value: 13.CasualWoman
+      value: 12.CasualWoman
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

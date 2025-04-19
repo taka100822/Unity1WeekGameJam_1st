@@ -31,6 +31,17 @@ public class NPCController : MonoBehaviour
         // プレイヤが範囲内に入ると会話開始
         if (distanceToPlayer < interactionRange)
         {
+            // プレイヤの方を向く
+            Vector3 direction = (player.position - transform.position).normalized;
+            direction.y = 0f; // Y軸方向は無視して水平回転のみにする
+            if (direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // スムーズに回転
+            }
+
+            player.GetComponent<PlayerMoveController>().isPaused = true;
+
             isdialog = true;
             player.GetComponent<PlayerInteraction>().SetActiveWindow();
             
@@ -51,6 +62,7 @@ public class NPCController : MonoBehaviour
         }
         else if(distanceToPlayer > interactionRange && isdialog)
         {
+            player.GetComponent<PlayerMoveController>().isPaused = false;
             isdialog = false;
             player.GetComponent<PlayerInteraction>().EndDialog();
         }
