@@ -22,6 +22,8 @@ public class TitleManager : MonoBehaviour
         ruleBox.SetActive(false);
         ruleWindow.SetActive(false);
         audioSource = GetComponent<AudioSource>();
+        rule1.SetActive(false);
+        rule2.SetActive(false);
     }
 
     void Update()
@@ -37,7 +39,8 @@ public class TitleManager : MonoBehaviour
 
                 case false:
                     if(!rule1.activeSelf && !rule2.activeSelf) //rule1もrule2もどちらも表示されていないなら
-                    {
+                    { 
+                        Debug.Log("a");
                         notInputSpace = true; // SPACEキーの入力を受け付けないをon
                         ruleWindow.SetActive(true);
                         rule1.SetActive(true);

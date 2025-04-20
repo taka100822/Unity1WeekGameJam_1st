@@ -4,6 +4,7 @@ public class NPCController : MonoBehaviour
 {
     public NPCDialogSO npcDialog; // ScriptableObjectで管理されたNPCのセリフ
     public int npcId;
+    [SerializeField] ParticleSystem heartPS;
 
     private Transform player;
     private int nowdialog = 0;
@@ -57,7 +58,12 @@ public class NPCController : MonoBehaviour
                 player.GetComponent<PlayerInteraction>().ShowDialog(npcDialog.npcNum[npcId], nowdialog);
                 player.GetComponent<PlayerInteraction>().ReducePeopleWantLoveNum(npcDialog.npcNum[npcId].HeartSize);
                 isheart = true;
+                Instantiate(heartPS, transform.position, Quaternion.identity);
                 player.GetComponent<PlayerMoveController>().MakeHeartSmaller(npcDialog.npcNum[npcId].HeartSize);
+            }
+            else if(isheart)
+            {
+                player.GetComponent<PlayerInteraction>().ShowDialog(npcDialog.npcNum[npcId], nowdialog);
             }
         }
         else if(distanceToPlayer > interactionRange && isdialog)

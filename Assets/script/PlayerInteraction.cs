@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour
     private NPCDialogSO.NPCDialog currentDialog; // 現在のNPCのセリフ
     private PlayerMoveController playerMoveController;
     private SEManager seManager;
+    public Volume volume;
 
     void Start()
     {
