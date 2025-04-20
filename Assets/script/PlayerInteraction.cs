@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [SerializeField] GameObject SE;
     public Text peopleWantLoveText; // NPCのセリフを表示するUI
     public Text interactionText; // NPCのセリフを表示するUI
     public GameObject talkWindow; // TalkWindow UI
@@ -13,12 +15,26 @@ public class PlayerInteraction : MonoBehaviour
     private int giveHeartNum = 0;
     public int peopleWantLoveNum = 3; // 愛を欲している人の数
     private NPCDialogSO.NPCDialog currentDialog; // 現在のNPCのセリフ
+    private PlayerMoveController playerMoveController;
+    private SEManager seManager;
 
     void Start()
     {
         // 最初はTalkWindowを非表示にする
         talkWindow.SetActive(false);
-        peopleWantLoveText.text = $"残り{peopleWantLoveNum}人";
+        peopleWantLoveText.text = $"残り {peopleWantLoveNum}人";
+
+        playerMoveController = GetComponent<PlayerMoveController>();
+        seManager = SE.GetComponent<SEManager>();
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && (isclear || playerMoveController.isdead))
+        {
+            seManager.SoundSE("retry");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void SetActiveWindow()
@@ -39,6 +55,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void SetActiveGameOverWindow()
     {
+        seManager.SoundSE("gameover");
         gameOverWindow.SetActive(true); // TalkWindowを表示
     }
 
@@ -47,18 +64,24 @@ public class PlayerInteraction : MonoBehaviour
         if(reduceHeartSize > 0)
         {
             --peopleWantLoveNum;
-            peopleWantLoveText.text = $"残り{peopleWantLoveNum}人";
+            seManager.SoundSE("give");
+            peopleWantLoveText.text = $"残り {peopleWantLoveNum}人";
             if(peopleWantLoveNum == 0)
             {
                 isclear = true;
                 ClearGame();
             } 
         }
+        else
+        {
+            seManager.SoundSE("recieve");
+        }
     }
 
     private void ClearGame()
     {
         ClearWindow.SetActive(true);
-        GetComponent<PlayerMoveController>().isPaused = true;
+        playerMoveController.isPaused = true;
+        seManager.SoundSE("clear");
     }
 }

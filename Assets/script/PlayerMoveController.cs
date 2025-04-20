@@ -5,21 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMoveController : MonoBehaviour
 {
-    private CharacterController characterController;
-    private Transform cameraTransform;
-    private Animator animator;
-
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float mouseSensitivity = 2f;
     [SerializeField] float gravity = 9.8f;
     [SerializeField] private GameObject headHeart; // ← ハート型オブジェクト
-    public float ratio; // ハートが小さくなる割合
-    private float sizeGetsmaller;  // 小さくなるサイズ
-    private bool isdead = false;
+
+
+    private CharacterController characterController;
+    private Transform cameraTransform;
+    private Animator animator;
     private Coroutine shrinkCoroutine;
-    public bool isPaused = false;
+    private float sizeGetsmaller;  // 小さくなるサイズ
+    public bool isdead = false;
     private float verticalVelocity = 0f;
     private float cameraPitch = 0f;
+
+    public float ratio; // ハートが小さくなる割合
+    public bool isPaused = false;
+    public bool isWalking;
+
 
     void Start()
     {
@@ -27,7 +31,6 @@ public class PlayerMoveController : MonoBehaviour
         cameraTransform = Camera.main.transform;
         animator = GetComponent<Animator>();
         sizeGetsmaller = headHeart.transform.localScale.x * ratio;
-        Debug.Log(sizeGetsmaller);
 
         animator.SetBool("Idle",true);
 
@@ -36,7 +39,6 @@ public class PlayerMoveController : MonoBehaviour
 
         // カーソルを画面中央にロック
         Cursor.lockState = CursorLockMode.Locked;
-        // headHeart.SetActive(true);
         if (shrinkCoroutine == null)
         {
             shrinkCoroutine = StartCoroutine(ShrinkHeart());
@@ -53,7 +55,7 @@ public class PlayerMoveController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space) && isdead)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -79,7 +81,7 @@ public class PlayerMoveController : MonoBehaviour
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
         move *= moveSpeed;
         
-        bool isWalking = moveX != 0 || moveZ != 0;
+        isWalking = moveX != 0 || moveZ != 0;
 
         if(!isdead){
             animator.SetBool("Walk", isWalking);
